@@ -1,4 +1,6 @@
 <?php
+require __DIR__ . './highscores.php';
+
 class Hangman {
 	private $playerName;
 	private $originalSolution;
@@ -43,31 +45,27 @@ class Hangman {
 			$position = strpos($this->solution, $guessLetter);
 		}
 		
-		if(strpos($this->originalSolution, "*") === false) {
-			$this->saveScore(time() - $startTime);
+		if($this->solution === preg_replace("/(.)/", "*", $this->originalSolution)) {
+			$highscores = new Highscores();
+			$highscores->saveScore($this->serialice(time() - $this->startTime));
 		}
 		
 		return $this->progress;
 	}
 	
 	public function serialice($duration) {
-		return $this->playerName.':'.$this->originalSolution.':'.$duration;
+		return $this->playerName.':'.$this->originalSolution.':'.$duration.':'.$this->tries;
 	}
 	
-	public function saveScore($duration) {
-		$file = fopen('highscores.txt', 'a+');
-		if (fwrite($file, $this->serialice($duration)."\n"))
-		{
-			fclose($file);
-			return true;
-		}
-		else
-		{
-			fclose($file);
-			return false;
-		}
-	}
+	
 }
 
 $hangman = new Hangman("solution", "name");
-echo $hangman->serialice(time());
+$hangman->play("s");
+$hangman->play("o");
+$hangman->play("l");
+$hangman->play("u");
+$hangman->play("t");
+$hangman->play("i");
+$hangman->play("o");
+$hangman->play("n");
