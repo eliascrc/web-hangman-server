@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . './highscores.php';
+require __DIR__ . '/highscores.php';
+require __DIR__ . '/score.php';
 
 class Hangman {
 	private $playerName;
@@ -47,7 +48,8 @@ class Hangman {
 		
 		if($this->solution === preg_replace("/(.)/", "*", $this->originalSolution)) {
 			$highscores = new Highscores();
-			$highscores->saveScore($this->serialice(time() - $this->startTime));
+      $score = new Score($this->serialice(time() - $this->startTime));
+			$highscores->saveScore($score);
 		}
 		
 		return $this->progress;
@@ -56,7 +58,6 @@ class Hangman {
 	public function serialice($duration) {
 		return $this->playerName.':'.$this->originalSolution.':'.$duration.':'.$this->tries;
 	}
-	
 	
 }
 
