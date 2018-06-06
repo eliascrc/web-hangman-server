@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Descripción WSDL de la clase Hola Mundo. -->
+
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			 xmlns:tns="urn:ECCI_Hangman"
+			 xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+			 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			 xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/"
+			 name="ECCI_Hangman"
+			 targetNamespace="urn:ECCI_Hangman">
+
+	<!-- Tipos complejos -->
+
+	<types>
+		<xsd:schema targetNamespace="urn:ECCI_Hangman" />
+	</types>
+
+	<!-- Mensajes para comunicarse con la clase Hangman. -->
+  
+  
+	<message name="startGameIn">
+		<part name="name" type="xsd:string"/>
+	</message>
+
+	<message name="startGameOut">
+		<part name="return" type="xsd:string"/>
+	</message>
+  
+  <message name="playLetterIn">
+		<part name="name" type="xsd:string"/>
+	</message>
+
+	<message name="playLetterOut">
+		<part name="return" type="xsd:string"/>
+	</message>
+  
+  <message name="testFunctionIn"/>
+
+	<message name="testFunctionOut">
+		<part name="return" type="xsd:string"/>
+	</message>
+  
+  <message name="listHighscoresIn"/>
+
+	<message name="listHighscoresOut">
+		<part name="return" type="xsd::string[]"/>
+	</message>
+
+	<!-- Puerto para comunicar con la clase Hangman, "ECCI_Hangman" -->
+
+	<portType name="ECCI_HangmanPort">
+    <operation name="testFunction">
+			<documentation>Hangman::testFunction() Devuelve el tiempo del servidor.</documentation>
+			<input message="tns:testFunctionIn"/>
+			<output message="tns:testFunctionOut"/>
+		</operation>
+    <operation name="listHighscores">
+			<documentation>Hangman::listHighscores() Devuelve el tiempo del servidor.</documentation>
+			<input message="tns:listHighscoresIn"/>
+			<output message="tns:listHighscoresOut"/>
+		</operation>
+    <operation name="startGame">
+			<documentation>Hangman::testFunction() Devuelve el tiempo del servidor.</documentation>
+			<input message="tns:startGameIn"/>
+			<output message="tns:startGameOut"/>
+		</operation>
+    <operation name="playLetter">
+			<documentation>Hangman::testFunction() Devuelve el tiempo del servidor.</documentation>
+			<input message="tns:startGameIn"/>
+			<output message="tns:startGameOut"/>
+		</operation>
+	</portType>
+
+	<!-- Vinculación de los llamados con el transporte - RPC, SOAP/Encoded over HTTP -->
+
+	<binding name="ECCI_HangmanBinding" type="tns:ECCI_HangmanPort">
+		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    
+    <operation name="testFunction">
+			<soap:operation soapAction="urn:ECCI_Hangman#Hangman#testFunction"/>
+			<input>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:ECCI_Hangman"/>
+			</input>
+			<output>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:ECCI_Hangman"/>
+			</output>
+		</operation>
+    
+    <operation name="listHighscores">
+			<soap:operation soapAction="urn:ECCI_Hangman#Hangman#listHighscores"/>
+			<input>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:ECCI_Hangman"/>
+			</input>
+			<output>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:ECCI_Hangman"/>
+			</output>
+		</operation>
+    
+    <operation name="startGame">
+			<soap:operation soapAction="urn:ECCI_Hangman#Hangman#startGame"/>
+			<input>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:ECCI_Hangman"/>
+			</input>
+			<output>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:ECCI_Hangman"/>
+			</output>
+		</operation>
+    
+    <operation name="playLetter">
+			<soap:operation soapAction="urn:ECCI_Hangman#Hangman#playLetter"/>
+			<input>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:ECCI_Hangman"/>
+			</input>
+			<output>
+				<soap:body use="encoded"
+				           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+						   namespace="urn:ECCI_Hangman"/>
+			</output>
+		</operation>
+    
+	</binding>
+
+	<!-- Punto de comunicación con la clase Hangman -->
+
+	<service name="ECCI_HangmanService">
+		<port name="ECCI_HangmanPort" binding="tns:ECCI_HangmanBinding">
+			<soap:address location="http://titanic.ecci.ucr.ac.cr/~eb54621/HangmanService/"/>
+		</port>
+	</service>
+</definitions>

@@ -52,4 +52,14 @@ class Highscores {
 			fwrite($file, $this->highscores[$i]->serialice()."\n");
 		}
   }
+  
+  public function getHighscores() {
+    $highscores = array();
+    $highscores[0] = "one";
+    $highscores[0] = "two";
+    for ($i = 0; $i < count($this->highscores); $i++) {
+      $highscores[$i] = $this->highscores[$i]->serialice();
+    }
+    return $highscores;
+  }
 }
