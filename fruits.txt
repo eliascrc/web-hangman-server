@@ -1,6 +1,6 @@
 aguacate
 albaricoque
-piña
+tomate
 banano
 cereza
 ciruela

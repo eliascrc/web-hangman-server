@@ -148,7 +148,7 @@
 
 	<service name="ECCI_HangmanService">
 		<port name="ECCI_HangmanPort" binding="tns:ECCI_HangmanBinding">
-			<soap:address location="http://titanic.ecci.ucr.ac.cr/~eb51322/HangmanService/"/>
+			<soap:address location="http://titanic.ecci.ucr.ac.cr/~eb54621/HangmanService/"/>
 		</port>
 	</service>
 </definitions>

@@ -7,7 +7,7 @@ class Highscores {
   
   public function __construct() {
     $file = fopen('highscores.txt', 'r');
-    $highscores = array();
+    $this->highscores = array();
 		$counter = 0;
 		while($line = fgets($file))
 		{
@@ -24,6 +24,7 @@ class Highscores {
 	
 	public function addScore(Score $score) {
     $enteredTheList = false;
+   
 		for ($i = 0; $i < count($this->highscores) && $i < 10 && !$enteredTheList; $i++) {
       $highscore = $this->highscores[$i];
 			if ($score->isBetterThan($this->highscores[$i])) {
@@ -34,8 +35,13 @@ class Highscores {
 			}
 		}
 		while (count($this->highscores) > 10) {
-			array_pop($highscores);
+			array_pop($this->highscores);
 		}
+    if (count($this->highscores) < 10 && !$enteredTheList) {
+      echo "ffff";
+      array_push($this->highscores, $score);
+      $enteredTheList = true;
+    }
 	}
 	
 	public function printHighscores() {
@@ -48,15 +54,15 @@ class Highscores {
   public function updateFile() {
     $file = fopen('highscores.txt', 'a+');
     file_put_contents("highscores.txt", "");
+    echo "Updating file".count($this->highscores);
     for ($i = 0; $i < count($this->highscores); $i++) {
 			fwrite($file, $this->highscores[$i]->serialice()."\n");
 		}
+    fclose($file);
   }
   
   public function getHighscores() {
     $highscores = array();
-    $highscores[0] = "one";
-    $highscores[0] = "two";
     for ($i = 0; $i < count($this->highscores); $i++) {
       $highscores[$i] = $this->highscores[$i]->serialice();
     }

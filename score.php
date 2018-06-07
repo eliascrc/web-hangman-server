@@ -16,7 +16,7 @@ class Score {
   }
   
   public function isBetterThan(Score $score) {
-     return $this->duration < $score->duration;
+     return $this->duration <= $score->duration;
   }
   
   public function toString() {
