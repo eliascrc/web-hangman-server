@@ -28,7 +28,9 @@ class Hangman {
 		if ($this->tries > 1) {
 			$triesAndProgress[1] = $this->makeGuess($guessLetter);
 			$triesAndProgress[0] = $this->tries;
-		}
+		} else {
+      return $triesAndProgress[0]."-".$this->originalSolution;
+    }
 		
 		return $triesAndProgress[0]."-".$triesAndProgress[1];
 	}
@@ -69,12 +71,12 @@ class Hangman {
 	}
 	
   public function startGame($name) {
-    $this->originalSolution = "hangman";
+    $this->originalSolution = $this->getSolution();
 		$this->solution = $this->originalSolution;
 		$this->progress = preg_replace("/(.)/", "*", $this->solution);
 		$this->tries = 7;
 		$this->failedLetters = array();
-		$this->playerName = $playerName;
+		$this->playerName = $name;
 		$this->startTime = time();
     return $this->progress;
   }
