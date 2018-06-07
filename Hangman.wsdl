@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Descripción WSDL de la clase Hola Mundo. -->
+<!-- Descripción WSDL de la clase Hangman. -->
 
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
              xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
@@ -14,7 +14,15 @@
 	<!-- Tipos complejos -->
 
 	<types>
-		<xsd:schema targetNamespace="urn:ECCI_Hangman" />
+		<xsd:schema targetNamespace="urn:ECCI_Hangman">
+      <xsd:complexType name="ArrayOfStrings">
+        <xsd:complexContent>
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute ref="soap-enc:arrayType" wsdl:arrayType="xsd:string[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
 	</types>
 
 	<!-- Mensajes para comunicarse con la clase Hangman. -->
@@ -45,7 +53,7 @@
   <message name="listHighscoresIn"/>
 
 	<message name="listHighscoresOut">
-		<part name="return" type="xsd::string[]"/>
+		<part name="return" type="tns:ArrayOfStrings"/>
 	</message>
 
 	<!-- Puerto para comunicar con la clase Hangman, "ECCI_Hangman" -->
@@ -140,7 +148,7 @@
 
 	<service name="ECCI_HangmanService">
 		<port name="ECCI_HangmanPort" binding="tns:ECCI_HangmanBinding">
-			<soap:address location="http://titanic.ecci.ucr.ac.cr/~eb54621/HangmanService/"/>
+			<soap:address location="http://titanic.ecci.ucr.ac.cr/~eb51322/HangmanService/"/>
 		</port>
 	</service>
 </definitions>
