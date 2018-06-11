@@ -94,4 +94,10 @@ class Hangman {
     return $data;
   }
   
+  public function setSolution($solution) {
+    $this->originalSolution = $solution;
+    $this->solution = $solution;
+  }
+  
 }
+
